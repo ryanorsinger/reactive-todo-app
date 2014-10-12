@@ -1,14 +1,28 @@
 <head>
-  <title>todos</title>
+  <title>Todos</title>
 </head>
 
 <body>
-  <h1>Welcome to Meteor!</h1>
+    <div class="containers">
+        <h3>Welcome to Real Time Reactive Todos with Meteor</h3>
 
-  {{> hello}}
+        {{> TodosPanel}}
+
+</div>
 </body>
 
-<template name="hello">
-  <button>Click Me</button>
-  <p>You've pressed the button {{counter}} times.</p>
+<template name="TodosPanel">
+    <div class="todos-panel">
+        <ul>
+            {{#each items}}
+                <li class="todo-item">
+                    {{> TodoItem}}
+                </li>
+            {{/each}}
+        </ul>
+    </div>
+</template>
+
+<template name="TodoItem">
+    {{subject}}
 </template>

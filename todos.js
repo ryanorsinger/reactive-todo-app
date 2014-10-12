@@ -1,23 +1,18 @@
+// Code outside of if(Meteor.isClient) and if(Meteor.isServer) is run on both server and client.
+
+// Create a new MongoDB collection called 'todos'
+Todos = new Meteor.Collection('todos');
+
 if (Meteor.isClient) {
-  // counter starts at 0
-  Session.setDefault("counter", 0);
-
-  Template.hello.helpers({
-    counter: function () {
-      return Session.get("counter");
-    }
-  });
-
-  Template.hello.events({
-    'click button': function () {
-      // increment the counter when button is clicked
-      Session.set("counter", Session.get("counter") + 1);
-    }
-  });
+    // Define a helper on the TodosPanel template
+    Template.TodosPanel.helpers({
+        //
+        items: function() {
+            return Todos.find();
+        }
+    });
 }
 
 if (Meteor.isServer) {
-  Meteor.startup(function () {
-    // code to run on server at startup
-  });
+
 }
