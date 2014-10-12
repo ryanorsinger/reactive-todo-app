@@ -11,6 +11,14 @@ if (Meteor.isClient) {
             return Todos.find();
         }
     });
+
+    Template.TodoItem.helpers({
+        // Define the isDoneChecked helper.
+        isDoneChecked: function() {
+            // Returns string 'checked' if input checkbox is checked.
+            return this.is_done ? 'checked' : '';
+        }
+    })
 }
 
 if (Meteor.isServer) {

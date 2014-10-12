@@ -5,10 +5,10 @@
 <body>
     <div class="containers">
         <h3>Welcome to Real Time Reactive Todos with Meteor</h3>
-
+        <!-- Inserts the TodosPanel template into the HTML here -->
         {{> TodosPanel}}
 
-</div>
+    </div>
 </body>
 
 <template name="TodosPanel">
@@ -24,5 +24,13 @@
 </template>
 
 <template name="TodoItem">
-    {{subject}}
+    <!-- Add checkbox for isDone -->
+    <div class="done">
+        <!-- Declare the isDoneChecked helper as an attribute of the input -->
+        <input type="checkbox" name"is_done" {{isDoneChecked}} />
+    </div>
+
+    <div class="subject">
+        {{subject}}
+    </div>
 </template>
