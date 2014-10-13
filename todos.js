@@ -9,7 +9,15 @@ if (Meteor.isClient) {
     Template.TodosPanel.helpers({
         //
         items: function() {
-            return Todos.find();
+            return Todos.find({}, {
+                sort: {
+                    created_at: -1
+                }
+            });
+        },
+
+        isDoneClass: function() {
+            return this.is_done ? 'done' : '';
         }
     });
 
@@ -37,9 +45,30 @@ if (Meteor.isClient) {
             });
         }
     });
+
+    //Create an event handler for the submit event of our CreateTodoItem
+    Template.CreateTodoItem.events({
+        //We're listening for the submit form event
+        'submit form': function(e, tmpl) {
+            // Prevent default since we're not posting the form to a server and we don't want that to happen.
+            e.preventDefault();
+            // Subject variable gets the subject from the input.
+            var subject = tmpl.find('input').value;
+
+            Todos.insert({
+                subject: subject,
+                created_at: new Date,
+                is_done: false
+            });
+
+            // Clear the form iteself after the submit event fires
+            var form = tmpl.find('form');
+            form.reset();
+        }
+    });
 }
 
-// Code that will run only on the server
+// Code that will execute only on the server
 if (Meteor.isServer) {
 
 }
