@@ -66,6 +66,18 @@ if (Meteor.isClient) {
             form.reset();
         }
     });
+
+    // Add completed and total count helpers to TodosCount template.
+    Template.TodosCount.helpers({
+        completedCount: function() {
+            return Todos.find({is_done: true}).count();
+        },
+
+        totalCount: function() {
+            return Todos.find({}).count();
+        }
+    });
+
 }
 
 // Code that will execute only on the server

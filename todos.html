@@ -23,6 +23,9 @@
                 </li>
             {{/each}}
         </ul>
+
+        <!-- Todos Count -->
+        {{> TodosCount}}
     </div>
 </template>
 
@@ -43,4 +46,10 @@
     <form class="create-todo">
         <input type="text" placeholder="Create new todo.." />
     </form>
+</template>
+
+<template name="TodosCount">
+    <div class="todos-count">
+        {{completedCount}} / {{totalCount}} todos completed.
+    </div>
 </template>
