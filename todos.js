@@ -5,6 +5,9 @@ Todos = new Meteor.Collection('todos');
 
 // Code that executes only on the client
 if (Meteor.isClient) {
+    // Subscribe the client to the 'todos' publication.
+    Meteor.subscribe('todos');
+
     // Define a helper on the TodosPanel template
     Template.TodosPanel.helpers({
         //
@@ -82,5 +85,9 @@ if (Meteor.isClient) {
 
 // Code that will execute only on the server
 if (Meteor.isServer) {
-
+    // Declare the publication on 'todos' collection.
+    Meteor.publish('todos', function() {
+        // This function will get called any time a client/browser subscribes to this publication.
+        return Todos.find()
+    });
 }
