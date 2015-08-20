@@ -1,14 +1,45 @@
 <head>
-  <title>simple-todos</title>
+  <title>Yet Another TODO List</title>
 </head>
 
 <body>
-  <h1>Welcome to Meteor!</h1>
+<main class="container">
 
-  {{> hello}}
+  <header>
+    <h1>Welcome to YATODO!</h1>
+  </header>
+
+  <section class="container">
+    <form class="new-task">
+      <input type="text" name="text" placeholder="Type to add new tasks" />
+    </form>
+  </section>
+  <section>
+    <h3>Items to do</h3>
+    <ul>
+      {{#each tasks}}
+        {{> task }}
+      {{/each}}
+    </ul>
+  </section>
+
+  <hr>
+
+  <section>
+    <h3>Tools for Sale</h3>
+    <ul>
+      {{#each items}}
+        {{> item}}
+      {{/ each}}
+    </ul>
+  </section>
+</main>
 </body>
 
-<template name="hello">
-  <button>Click Me</button>
-  <p>You've pressed the button {{counter}} times.</p>
+<template name="task">
+  <li>{{ text }}</li>
+</template>
+
+<template name="item">
+  <li>{{ text }}</li>
 </template>
