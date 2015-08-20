@@ -1,6 +1,27 @@
 Tasks = new Mongo.Collection("tasks");
 Tools = new Mongo.Collection("tools");
 
+var formHandler = {
+  getFormInput: function getFormInput(thisEvent) {
+    console.log(thisEvent);
+
+    // Prevent form default
+    thisEvent.preventDefault();
+
+    // Get text from input
+    var text = thisEvent.target.text.value;
+
+    Tasks.insert({
+        text: text,
+        createdAt: new Date() // current time
+
+    });
+
+    // clear form
+    return thisEvent.target.text.value = "";
+  }
+}
+
 
 if (Meteor.isClient) {
   // Helper functions
@@ -12,23 +33,12 @@ if (Meteor.isClient) {
       return Tools.find({});
     }
   });
+
   // Event handling
   Template.body.events({
-    "submit .new-task": function(event) {
-      // Prevent default browser form submit.
-      event.preventDefault();
-
-      // Get the value from the form element.
-      var text = event.target.text.value;
-
-      // Insert the task into the collection
-      Tasks.insert({
-        text: text,
-        createdAt: new Date() // current time
-      });
-
-      // Clear the form
-      event.target.text.value = '';
+    "submit .new-task": function getContent(event) {
+      var formInput = event;
+      formHandler.getFormInput(formInput);
     }
   });
 }
@@ -39,5 +49,3 @@ if (Meteor.isServer) {
     console.log('I\'m running on the server, yay!');
   });
 }
-
-console.log('This code runs both on server and client');
